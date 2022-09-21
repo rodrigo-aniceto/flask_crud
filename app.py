@@ -12,7 +12,7 @@ import sys
 app = Flask(__name__)
 Bootstrap(app)
 db_connect = config('CONNECT_STRING')
-app.config["SQLALCHEMY_DATABASE_URI"] = db_connect
+app.config["SQLALCHEMY_DATABASE_URI"] = db_connect #string de conexão privada SQLALCHEMY
 db = SQLAlchemy(app)
 
 """
@@ -23,8 +23,6 @@ CREATE TABLE tasks (
     PRIMARY KEY (id)  
 );
 """
-
-#colocar time stamp para ser a chave primaria
 
 #modelo de dados do BD
 class Tarefas(db.Model):
