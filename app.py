@@ -11,8 +11,9 @@ import sys
 
 app = Flask(__name__)
 Bootstrap(app)
-db_connect = config('CONNECT_STRING')
-app.config["SQLALCHEMY_DATABASE_URI"] = db_connect #string de conexão privada SQLALCHEMY
+#db_connect = config('CONNECT_STRING')
+#app.config["SQLALCHEMY_DATABASE_URI"] = db_connect #string de conexão privada SQLALCHEMY
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
 db = SQLAlchemy(app)
 
 """
@@ -47,10 +48,11 @@ pra construir o BD:
 
 flask shell
 from app import db
-db.create_all()
-quit()
 """
-
+db.create_all()
+#quit()
+"""
+"""
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
