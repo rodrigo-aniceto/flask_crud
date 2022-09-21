@@ -1,0 +1,61 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}Gerenciador de tarefas{% endblock %}
+
+
+{% block navbar %}
+<!--
+<div class="alert alert-danger">
+    <p class="text-center">Página de response</p>
+</div>
+-->
+{% endblock %}
+
+
+{% block content %}
+
+<div class="content">
+    <h1>Gerenciador de tarefas</h1>
+
+
+    {% if tasks|length < 1 %}
+    <h4> There are no tasks yet</h4>
+    {% else %}
+
+    <table class="table">
+        <tr>
+            <th>Task</th>
+            <th>Details</th>
+            <th>Actions</th>
+            <th>Completed</th>
+        </tr>
+
+        {% for task in tasks %}
+
+        <tr>
+            <td> {{ task.content }} </td>
+            <td> {{ task.details.content }} </td>
+            <td>
+                <a href="/delete/{{task.id}}">Delete</a>
+                <br>
+                <a href="/update/{{task.id}}">Update</a>
+            </td>
+            <td> {% if task.completed == 1 %} Concluida {% else %} <form action="/complete/{{task.id}}"><input type="submit" value="Concluir"></form> {% endif %} </td>
+        </tr>
+
+        {% endfor %}
+    </table>
+    {% endif %}
+    <form action="/" method="POST">
+        <h4>nova tarefa:
+        <input type="text" name="content" id="content">
+        </h4>
+        <h4>
+        detalhes:
+        <input type="text" name="details" id="details">
+        </h4>
+        <input type="submit" value="Add Task">
+    </form>
+</div>
+
+{% endblock %}
